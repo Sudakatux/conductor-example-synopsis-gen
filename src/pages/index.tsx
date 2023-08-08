@@ -51,7 +51,8 @@ const MenuProps = {
     },
   },
 };
-const names = [
+
+const AVAILABLE_GENRES = [
   "Action",
   "Adventure",
   "Animation",
@@ -66,6 +67,8 @@ const names = [
   "Western",
   "Sports",
 ];
+const AVAILABLE_LANGUAGES = ["english", "french", "german", "spanish"];
+
 interface Props {
   conductor: {
     serverUrl: string;
@@ -80,12 +83,14 @@ const runWorkflow = async ({
   workflowName,
   documentURL,
   genres,
+  language,
 }: {
   serverUrl: string;
   TOKEN: string;
   workflowName: string;
   documentURL: string;
   genres: string[];
+  language: string;
 }) => {
   const client = await orkesConductorClient({ serverUrl, TOKEN });
   const executionId = await new WorkflowExecutor(client).startWorkflow({
@@ -99,6 +104,8 @@ const runWorkflow = async ({
       documentURL,
       model: "text-davinci-003",
       genres: genres.length > 0 ? genres.join(",") : undefined,
+      language,
+      maxTokens: 1000,
     },
   });
   return executionId;
@@ -109,6 +116,7 @@ export default function Home(props: Props) {
   const [detectGenre, setDetectGenre] = useState(true);
   const [genres, setGenres] = useState<string[]>([]);
   const [url, setURl] = useState<string>("");
+  const [lang, setLang] = useState<string>("english");
   const router = useRouter();
 
   const handleChange = (event: SelectChangeEvent<typeof genres>) => {
@@ -119,16 +127,16 @@ export default function Home(props: Props) {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
-    if(detectGenre){
+    if (detectGenre) {
       setDetectGenre(false);
     }
   };
   const handleAutoDetectGenre = () => {
-    if(!detectGenre){
+    if (!detectGenre) {
       setGenres([]);
     }
     setDetectGenre(!detectGenre);
-  }
+  };
 
   const handleGenerate = () => {
     runWorkflow({
@@ -137,6 +145,7 @@ export default function Home(props: Props) {
       workflowName: props.workflowName,
       documentURL: url,
       genres,
+      language: lang,
     }).then((executionId) => router.replace(`/processing/${executionId}`));
   };
   return (
@@ -154,6 +163,19 @@ export default function Home(props: Props) {
               placeholder="Paste here..."
               onChange={(event) => setURl(event.target.value)}
             />
+            <Select
+              labelId="languageSelector"
+              MenuProps={MenuProps}
+              onChange={(event) => setLang(event.target.value)}
+              input={<OutlinedInput />}
+              value={lang}
+            >
+              {AVAILABLE_LANGUAGES.map((lang) => (
+                <MenuItem key={lang} value={lang}>
+                  <label style={{ textTransform: "capitalize" }}>{lang}</label>
+                </MenuItem>
+              ))}
+            </Select>
             <FormControlLabel
               control={<Checkbox />}
               label="Auto-detect genre"
@@ -175,7 +197,7 @@ export default function Home(props: Props) {
               input={<OutlinedInput />}
               MenuProps={MenuProps}
             >
-              {names.map((name) => {
+              {AVAILABLE_GENRES.map((name) => {
                 const notSelected = genres.indexOf(name) === -1;
 
                 return (
