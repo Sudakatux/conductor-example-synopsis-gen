@@ -36,7 +36,7 @@ export default function Result(props: Props) {
             spacing={6}
             justifyContent={"center"}
             alignItems={"center"}
-            direction={"row"}
+            direction={{ xs: "column", sm: "row" }}
           >
             {Array.isArray(props.workflowStatus?.output?.result) ? (
               props.workflowStatus?.output?.result.map(
