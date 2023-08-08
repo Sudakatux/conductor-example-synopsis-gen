@@ -113,7 +113,7 @@ export default function MainLayout({ title, children }: Props) {
               src="/orkesLogo.png"
               alt="orkesLogo"
               width="100px"
-              height="50px"
+              height="36px"
             />
           </a>
         </Box>
