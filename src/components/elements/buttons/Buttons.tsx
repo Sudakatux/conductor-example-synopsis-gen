@@ -10,7 +10,7 @@ const fontStyles = {
 const buttonStyles = {
   borderRadius: "108px",
   textTransform: "none",
-  height: "33px",
+  height: "40px",
   paddingLeft: "33px",
   paddingRight: "33px",
 };
