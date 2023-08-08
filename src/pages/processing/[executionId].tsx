@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { WorkflowStatus } from "@io-orkes/conductor-javascript";
 import { GetServerSidePropsContext } from "next";
 import MainLayout from "@/components/MainLayout";
@@ -53,12 +53,12 @@ export default function Processing(props: Props) {
   return (
     <MainLayout title="Movie Synopsis">
       <MainTitle align="center">Movie Synopsis for</MainTitle>
-      <Box>
-        Generating...
+      <Stack direction={"row"} spacing={1} pt={2}>
+        <Box mr={1}>Generating...</Box>
         <AnimationContainer>
           <FakeLogo />
         </AnimationContainer>
-      </Box>
+      </Stack>
     </MainLayout>
   );
 }

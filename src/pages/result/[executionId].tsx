@@ -38,10 +38,12 @@ export default function Result(props: Props) {
             alignItems={"center"}
             direction={"row"}
           >
-            <MovieSummary
-              genre="Action"
-              summary={props.workflowStatus?.output?.text}
-            />
+            {Array.isArray(props.workflowStatus?.output?.result) ? null : (
+              <MovieSummary
+                genre="Action"
+                summary={props.workflowStatus?.output?.result}
+              />
+            )}
           </Stack>
           <PrimaryButton href="/">Generate Another</PrimaryButton>
         </Stack>
