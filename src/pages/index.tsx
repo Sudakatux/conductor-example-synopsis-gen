@@ -130,22 +130,24 @@ export default function Home(props: Props) {
     <MainLayout title="Movie Synopsis">
       <Stack spacing={6} justifyContent={"center"} alignItems={"center"}>
         <MainTitle>Movie Synopsis</MainTitle>
-        <Stack spacing={2}>
+        <Stack spacing={4}>
           <SubText1>
             To get started, please enter a URL for the movie or its script
           </SubText1>
-          <TextField
-            label="Movie/Script URL*"
-            variant="filled"
-            placeholder="Paste here..."
-            onChange={(event) => setURl(event.target.value)}
-          />
-          <FormControlLabel
-            control={<Checkbox />}
-            label="Auto-detect genre"
-            checked={detectGenre}
-            onChange={() => setDetectGenre(!detectGenre)}
-          />
+          <Stack spacing={2} mt={2}>
+            <TextField
+              label="Movie/Script URL*"
+              variant="filled"
+              placeholder="Paste here..."
+              onChange={(event) => setURl(event.target.value)}
+            />
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Auto-detect genre"
+              checked={detectGenre}
+              onChange={() => setDetectGenre(!detectGenre)}
+            />
+          </Stack>
         </Stack>
         {detectGenre ? null : (
           <FormControl sx={{ m: 1, width: 300 }} variant="filled">

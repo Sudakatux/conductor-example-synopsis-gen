@@ -53,7 +53,7 @@ export default function Processing(props: Props) {
   return (
     <MainLayout title="Movie Synopsis">
       <MainTitle align="center">Movie Synopsis for</MainTitle>
-      <Stack direction={"row"} spacing={1} pt={2}>
+      <Stack direction={"row"} spacing={4} pt={2}>
         <Box mr={1}>Generating...</Box>
         <AnimationContainer>
           <FakeLogo />
