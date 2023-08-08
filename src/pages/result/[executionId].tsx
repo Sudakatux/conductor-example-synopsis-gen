@@ -53,7 +53,7 @@ export default function Result(props: Props) {
   return (
     <MainLayout title="Movie Synopsis">
       <MainTitle align="center">Movie Synopsis</MainTitle>
-      <Box>
+      <Box mt={4}>
         <Stack
           pt={2}
           spacing={6}
