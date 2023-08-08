@@ -10,7 +10,6 @@ export const MovieSummary = (prop: MovieSummaryProps) => {
     <Paper
       sx={{
         width: "291px",
-        height: "302px",
         borderRadius: "5px",
         background: "#D9D9D9",
       }}
@@ -34,7 +33,7 @@ export const MovieSummary = (prop: MovieSummaryProps) => {
       <Box
         sx={{
           overflowY: "auto",
-          height: "266px",
+          height: "400px",
             background: "#D9D9D9",
             borderRadius: "5px 5px",
         }}
@@ -42,7 +41,7 @@ export const MovieSummary = (prop: MovieSummaryProps) => {
         <Typography
           sx={{
             padding: 2,
-            lineHeight: "17px",
+            lineHeight: "23px",
             size: "12px",
           }}
           align="left"
