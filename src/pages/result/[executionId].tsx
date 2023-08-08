@@ -38,7 +38,22 @@ export default function Result(props: Props) {
             alignItems={"center"}
             direction={"row"}
           >
-            {Array.isArray(props.workflowStatus?.output?.result) ? null : (
+            {Array.isArray(props.workflowStatus?.output?.result) ? (
+              props.workflowStatus?.output?.result.map(
+                (resObj: Record<string, string>) => {
+                  const genreSummary = Object.entries(resObj).map(
+                    ([k, v]: [string, string]) => ({ genre: k, summary: v })
+                  )[0];
+                  return (
+                    <MovieSummary
+                      key={genreSummary.genre}
+                      genre={genreSummary.genre}
+                      summary={genreSummary.summary}
+                    />
+                  );
+                }
+              )
+            ) : (
               <MovieSummary
                 genre="Action"
                 summary={props.workflowStatus?.output?.result}
