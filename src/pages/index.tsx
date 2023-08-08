@@ -15,7 +15,7 @@ import {
   OutlinedInput,
   Box,
 } from "@mui/material";
-import { Theme, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import CheckIcon from "@mui/icons-material/Check";
 import {
   orkesConductorClient,
@@ -79,11 +79,13 @@ const runWorkflow = async ({
   TOKEN,
   workflowName,
   documentURL,
+  genres,
 }: {
   serverUrl: string;
   TOKEN: string;
   workflowName: string;
   documentURL: string;
+  genres: string[];
 }) => {
   const client = await orkesConductorClient({ serverUrl, TOKEN });
   const executionId = await new WorkflowExecutor(client).startWorkflow({
@@ -96,6 +98,7 @@ const runWorkflow = async ({
       intermediatePromptName: "synopsisIntermediateSummary",
       documentURL,
       model: "text-davinci-003",
+      genres: genres.length > 0 ? genres.join(",") : undefined,
     },
   });
   return executionId;
@@ -116,7 +119,16 @@ export default function Home(props: Props) {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+    if(detectGenre){
+      setDetectGenre(false);
+    }
   };
+  const handleAutoDetectGenre = () => {
+    if(!detectGenre){
+      setGenres([]);
+    }
+    setDetectGenre(!detectGenre);
+  }
 
   const handleGenerate = () => {
     runWorkflow({
@@ -124,6 +136,7 @@ export default function Home(props: Props) {
       TOKEN: props.conductor.TOKEN,
       workflowName: props.workflowName,
       documentURL: url,
+      genres,
     }).then((executionId) => router.replace(`/processing/${executionId}`));
   };
   return (
@@ -145,7 +158,7 @@ export default function Home(props: Props) {
               control={<Checkbox />}
               label="Auto-detect genre"
               checked={detectGenre}
-              onChange={() => setDetectGenre(!detectGenre)}
+              onChange={handleAutoDetectGenre}
             />
           </Stack>
         </Stack>

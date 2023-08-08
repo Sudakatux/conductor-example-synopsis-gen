@@ -52,8 +52,8 @@ const MovieSummaryList = (props: Props) => {
 export default function Result(props: Props) {
   return (
     <MainLayout title="Movie Synopsis">
-      <MainTitle align="center">Movie Synopsis for</MainTitle>
-      <Box>
+      <MainTitle align="center">Movie Synopsis</MainTitle>
+      <Box mt={4}>
         <Stack
           pt={2}
           spacing={6}
