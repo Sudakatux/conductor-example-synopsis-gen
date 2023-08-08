@@ -2,7 +2,7 @@ import { Stack, Box } from "@mui/material";
 import { GetServerSidePropsContext } from "next";
 import MainLayout from "@/components/MainLayout";
 import { MovieSummary } from "@/components/containers/MovieSummary";
-import { MainTitle } from "@/components/elements/texts/Typographys";
+import { MainTitle, SubText1 } from "@/components/elements/texts/Typographys";
 import { PrimaryButton } from "@/components/elements/buttons/Buttons";
 import { getExecution } from "@/serverhelpers/utils";
 import { WorkflowStatus } from "@io-orkes/conductor-javascript";
@@ -21,6 +21,34 @@ type Props = {
   workflowStatus: WorkflowStatus;
 };
 
+const MovieSummaryList = (props: Props) => {
+  return (
+    <>
+      {Array.isArray(props.workflowStatus?.output?.result) ? (
+        props.workflowStatus?.output?.result.map(
+          (resObj: Record<string, string>) => {
+            const genreSummary = Object.entries(resObj).map(
+              ([k, v]: [string, string]) => ({ genre: k, summary: v })
+            )[0];
+            return (
+              <MovieSummary
+                key={genreSummary.genre}
+                genre={genreSummary.genre}
+                summary={genreSummary.summary}
+              />
+            );
+          }
+        )
+      ) : (
+        <MovieSummary
+          genre="Action"
+          summary={props.workflowStatus?.output?.result}
+        />
+      )}
+    </>
+  );
+};
+
 export default function Result(props: Props) {
   return (
     <MainLayout title="Movie Synopsis">
@@ -36,13 +64,12 @@ export default function Result(props: Props) {
             spacing={6}
             justifyContent={"center"}
             alignItems={"center"}
-            direction={"row"}
+            direction={{ xs: "column", sm: "row" }}
           >
-            {Array.isArray(props.workflowStatus?.output?.result) ? null : (
-              <MovieSummary
-                genre="Action"
-                summary={props.workflowStatus?.output?.result}
-              />
+            {props.workflowStatus.status === "COMPLETED" ? (
+              <MovieSummaryList {...props} />
+            ) : (
+              <SubText1>Something went wrong</SubText1>
             )}
           </Stack>
           <PrimaryButton href="/">Generate Another</PrimaryButton>

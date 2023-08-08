@@ -24,6 +24,7 @@ export const MovieSummary = (prop: MovieSummaryProps) => {
           lineHeight: "24px",
           padding: "8px 16px",
           borderRadius: "5px 5px 0px 0px",
+          height: "35px",
         }}
         align="center"
         paragraph
@@ -33,14 +34,14 @@ export const MovieSummary = (prop: MovieSummaryProps) => {
       <Box
         sx={{
           overflowY: "auto",
-          height: "297px",
+          height: "266px",
+            background: "#D9D9D9",
+            borderRadius: "5px 5px",
         }}
       >
         <Typography
           sx={{
             padding: 2,
-            background: "#D9D9D9",
-            borderRadius: "5px 5px",
             lineHeight: "17px",
             size: "12px",
           }}

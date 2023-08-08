@@ -24,11 +24,15 @@ export const TitleInTitleBar = (typographyProps: TypographyProps) => {
 export const MainTitle = (typographyProps: TypographyProps) => {
   return (
     <Typography
-      variant="h3"
+      variant="h1"
       sx={{
         ...commonStyles,
         fontWeight: 700,
-        fontSize: "36px",
+        fontSize: {
+          md: "36px",
+          sm: "26px",
+          xs: "26px",
+        },
         lineHeight: "43px",
       }}
       {...typographyProps}
@@ -39,7 +43,7 @@ export const MainTitle = (typographyProps: TypographyProps) => {
 export const SubText1 = (typographyProps: TypographyProps) => {
   return (
     <Typography
-      variant="h3"
+      variant="h2"
       sx={{
         ...commonStyles,
         fontWeight: 400,
