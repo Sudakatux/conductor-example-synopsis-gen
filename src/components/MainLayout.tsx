@@ -107,6 +107,17 @@ export default function MainLayout({ title, children }: Props) {
           alignItems: "center",
         }}
       >
+
+        <p
+          style={{
+            marginLeft: "10px",
+            color: "#000",
+            opacity: "0.5",
+            fontSize: "15px",
+          }}
+        >
+          Powered by 
+        </p>
         <Box>
           <a href="https://orkes.io/">
             <img
@@ -117,16 +128,6 @@ export default function MainLayout({ title, children }: Props) {
             />
           </a>
         </Box>
-        <p
-          style={{
-            marginLeft: "10px",
-            color: "#000",
-            opacity: "0.5",
-            fontSize: "15px",
-          }}
-        >
-          Powered by Orkes
-        </p>
       </div>
     </>
   );
