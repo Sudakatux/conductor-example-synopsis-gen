@@ -103,7 +103,7 @@ const runWorkflow = async ({
 
 export default function Home(props: Props) {
   const theme = useTheme();
-  const [detectGenre, setDetectGenre] = useState(false);
+  const [detectGenre, setDetectGenre] = useState(true);
   const [genres, setGenres] = useState<string[]>([]);
   const [url, setURl] = useState<string>("");
   const router = useRouter();
