@@ -52,7 +52,7 @@ const MovieSummaryList = (props: Props) => {
 export default function Result(props: Props) {
   return (
     <MainLayout title="Movie Synopsis">
-      <MainTitle align="center">Movie Synopsis for</MainTitle>
+      <MainTitle align="center">Movie Synopsis</MainTitle>
       <Box>
         <Stack
           pt={2}
