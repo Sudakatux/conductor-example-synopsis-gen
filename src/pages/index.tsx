@@ -105,7 +105,7 @@ const runWorkflow = async ({
       model: "text-davinci-003",
       genres: genres.length > 0 ? genres.join(",") : undefined,
       language,
-      maxTokens: 1000,
+      maxTokens: 500,
     },
   });
   return executionId;
